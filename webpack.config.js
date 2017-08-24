@@ -1,9 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = requier('clean-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-module.export = {
+module.exports = {
 
     entry: './src/app.js',
     output: {
@@ -23,12 +23,19 @@ module.export = {
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 use: ['file-loader']
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader']
             }
         ]
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            hash: true
+        }),
         new webpack.HotModuleReplacementPlugin()
 
     ],
