@@ -4,7 +4,9 @@
   "description": "Empty template for web js projects with webpack",
   "main": "app.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
+    "build-prod": "webpack --config webpack.prod.js",
+    "build-dev": "webpack --config webpack.dev.js",
+    "start-prod": "webpack-dev-server --config webpack.prod.js --open",
     "start": "webpack-dev-server --config webpack.dev.js --open"
   },
   "author": "Emanuele Ramella-Paia",

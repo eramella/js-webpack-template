@@ -28,6 +28,6 @@ module.exports = Merge(CommonConfig, {
                 'NODE_ENV': JSON.stringify('development')
             }
         }),
-    ]
-
+    ],
+    devtool: 'cheap-eval-source-map'
 });
