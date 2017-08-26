@@ -4,18 +4,14 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
-
     entry: './src/app.js',
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        sourceMapFilename: '[name].map'
     },
     module: {
         rules: [
-            {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: ['file-loader']
@@ -27,6 +23,15 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: ['html-loader']
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 100000
+                    }
+                }
             }
         ]
     },
@@ -36,14 +41,7 @@ module.exports = {
             template: 'src/index.html',
             hash: true
         }),
-        new webpack.HotModuleReplacementPlugin(),
-        //Addting the following plugin to define the local variable 'process.env.NODE_ENV'
-        //It will be use to import index.html in development but not in production. Remember to define this variable based on the actual enviroment.
-        //This is used to have page refresh on html changes, which it can be done only on required files.
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
-          })
-
+        new webpack.HotModuleReplacementPlugin()
     ],
     devtool: 'inline-source-map',
     devServer: {
