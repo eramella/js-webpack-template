@@ -17,7 +17,7 @@ module.exports = {
                 use: ['file-loader']
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: ['file-loader']
             },
             {
@@ -25,7 +25,9 @@ module.exports = {
                 use: ['html-loader']
             },
             {
-                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                //This regex will allow to load icons with version correctly (font awesome)
+                //using url-loader all other fonts will be loaded with file-loader (see above)
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: {
                     loader: 'url-loader',
                     options: {
